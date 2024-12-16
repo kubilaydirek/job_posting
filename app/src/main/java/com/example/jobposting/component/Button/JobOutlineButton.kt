@@ -11,21 +11,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jobposting.component.JobText
+import com.example.jobposting.ui.theme.Dark
 import com.example.jobposting.ui.theme.Primary
 import com.example.jobposting.ui.theme.White
+import com.example.jobposting.ui.theme.customTypography
 
 @Composable
 fun JobOutlineButton(modifier: Modifier = Modifier, onClick: () -> Unit,text : String) {
     OutlinedButton(
         modifier = modifier
             .fillMaxWidth()
-            .height(40.dp),
-        border = BorderStroke(width = 3.dp, color = Primary),
-        shape = RoundedCornerShape(12.dp),
+            .height(56.dp),
+        border = BorderStroke(width = 2.dp, color = Primary),
+        shape = RoundedCornerShape(16.dp),
         onClick = { onClick.invoke() },
         colors = ButtonDefaults.buttonColors(containerColor = White)
     ) {
-        JobText(text = text, bold = true)
+        JobText(text = text, bold = true, style = customTypography.headlineSmall, color = Dark)
     }
 }
 

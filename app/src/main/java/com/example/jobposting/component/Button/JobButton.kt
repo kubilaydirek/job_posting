@@ -12,21 +12,22 @@ import androidx.compose.ui.unit.dp
 import com.example.jobposting.component.JobText
 import com.example.jobposting.ui.theme.Primary
 import com.example.jobposting.ui.theme.White
+import com.example.jobposting.ui.theme.customTypography
 
 @Composable
-fun JobButton(modifier: Modifier = Modifier, onclick: () -> Unit) {
+fun JobButton(modifier: Modifier = Modifier, onclick: () -> Unit, buttonText: String) {
     Button(
         onClick = { onclick.invoke() }, modifier = modifier
             .fillMaxWidth()
-            .height(40.dp), shape = RoundedCornerShape(12.dp),
+            .height(56.dp), shape = RoundedCornerShape(16.dp),
         colors = ButtonDefaults.buttonColors(containerColor = Primary)
     ) {
-        JobText(text ="Get Started", color = White, bold = true )
+        JobText(text = buttonText, color = White, bold = true, style = customTypography.titleSmall)
     }
 }
 
 @Preview
 @Composable
 private fun JobButtonPreview() {
-    JobButton(onclick = {})
+    JobButton(onclick = {}, buttonText = "Get Started")
 }

@@ -5,8 +5,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,18 +25,20 @@ import com.example.jobposting.ui.theme.Secondary
 fun SocialButton(modifier: Modifier = Modifier,painter: Painter) {
     Box(
         modifier = modifier
-            .clip(RoundedCornerShape(10.dp))
+            .clip(RoundedCornerShape(8.dp))
             .clickable {  }
-            .size(50.dp)
+            .width(40.dp).height(40.dp)
             .background(Secondary),
         contentAlignment = Alignment.Center,
         ) {
         Image(
             painter = painter,
             contentDescription = null,
+
             modifier = modifier
                 .fillMaxSize()
-                .padding(8.dp)
+                .padding(8.dp),
+
         )
     }
 }

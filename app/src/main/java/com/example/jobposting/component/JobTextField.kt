@@ -4,11 +4,13 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -26,9 +28,11 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.jobposting.R
 import com.example.jobposting.ui.theme.DarkGrey
 import com.example.jobposting.ui.theme.Error
+import com.example.jobposting.ui.theme.customTypography
 
 @Composable
 fun JobTextField(
@@ -57,9 +61,9 @@ fun JobTextField(
             },
             modifier = modifier
                 .fillMaxWidth()
+                .height(56.dp)
                 .border(BorderStroke(width = 1.dp, color = DarkGrey), shape = RoundedCornerShape(12.dp)),
-            colors =
-            TextFieldDefaults.colors().copy(
+            colors = TextFieldDefaults.colors().copy(
                 disabledPlaceholderColor = DarkGrey,
                 focusedPlaceholderColor = DarkGrey,
                 unfocusedPlaceholderColor = DarkGrey,
@@ -75,13 +79,16 @@ fun JobTextField(
                 errorTextColor = Error
             ),
             shape = RoundedCornerShape(12.dp),
-            placeholder = { JobText(text = label) },
+            placeholder = { JobText(text = label, color = DarkGrey, style = customTypography.headlineSmall) },
             trailingIcon = {
                 if (isPasswordField) {
                     IconButton(onClick = { passwordVisible = !passwordVisible }) {
                         Icon(
-                            painter = painterResource(if (passwordVisible) R.drawable.visibility else R.drawable.visible),
-                            contentDescription = null
+                            painter = painterResource(if (passwordVisible) R.drawable.password_icons else R.drawable.password_icons_visible),
+                            contentDescription = null,
+                            modifier = modifier
+                                .height(24.dp)
+                                .width(24.dp)
                         )
                     }
                 } else {
@@ -89,7 +96,7 @@ fun JobTextField(
                 }
             },
             isError = isError,
-            visualTransformation = if (isPasswordField) PasswordVisualTransformation() else VisualTransformation.None,
+            visualTransformation = if (passwordVisible) PasswordVisualTransformation() else VisualTransformation.None,
             maxLines = maxLine,
             keyboardOptions = keyboardOptions,
             readOnly = readOnly
