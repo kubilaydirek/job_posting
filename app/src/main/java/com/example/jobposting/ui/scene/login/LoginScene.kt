@@ -27,6 +27,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jobposting.R
+import com.example.jobposting.ui.component.JobScaffold
 import com.example.jobposting.ui.component.button.JobButton
 import com.example.jobposting.ui.component.button.SocialButton
 import com.example.jobposting.ui.component.text.JobText
@@ -39,36 +40,41 @@ import com.example.jobposting.ui.theme.customTypography
 @Composable
 fun LoginScene(modifier: Modifier = Modifier) {
     val viewState: LoginViewState = rememberLoginViewState()
-    Scaffold (
-        modifier = modifier.imePadding(),
+
+    JobScaffold(
         content = {
-            Surface(modifier = modifier.fillMaxSize()) {
-                Box(
-                    modifier = modifier
-                        .fillMaxSize()
-                        .padding(top = 96.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
-                ) {
-                    Column(
-                        modifier = modifier.fillMaxSize().verticalScroll(rememberScrollState()),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(5.dp)
-                    ) {
-                        Image(
-                            painter = painterResource(R.drawable.cool_kids_sitting),
-                            contentDescription = null,
-                            contentScale = ContentScale.Fit,
-                            modifier = modifier
-                                .height(253.dp)
-                                .width(343.dp)
-                        )
-                        TextContent(modifier)
-                        Form(modifier, viewState)
-                    }
-                }
-            }
+            Content(modifier, viewState)
         }
     )
 
+}
+
+@Composable
+private fun Content(modifier: Modifier, viewState: LoginViewState) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(top = 96.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
+    ) {
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(5.dp)
+        ) {
+            Image(
+                painter = painterResource(R.drawable.cool_kids_sitting),
+                contentDescription = null,
+                contentScale = ContentScale.Fit,
+                modifier = modifier
+                    .height(253.dp)
+                    .width(343.dp)
+            )
+            TextContent(modifier)
+            Form(modifier, viewState)
+        }
+    }
 }
 
 
@@ -85,7 +91,11 @@ private fun TextContent(modifier: Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             JobText(text = stringResource(R.string.log_in), color = Dark, style = customTypography.headlineLarge)
-            JobText(text = stringResource(R.string.login_with_social_networks), color = DarkGrey, style = customTypography.titleSmall)
+            JobText(
+                text = stringResource(R.string.login_with_social_networks),
+                color = DarkGrey,
+                style = customTypography.titleSmall
+            )
             SocialButtons(modifier)
         }
     }

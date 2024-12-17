@@ -33,19 +33,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Column(modifier = modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
-        Text("Merhaba Kubilay", style = customTypography.bodyLarge)
-        JobText(text = "Merhaba Kubilay")
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    JobPostingTheme {
-        Greeting("Android")
-    }
-}
