@@ -23,7 +23,9 @@ class LoginViewModel @Inject constructor() : ViewModel() {
         viewModelScope.launch {
             _uiState.value = UiState.Loading
             delay(10000)
-            _uiState.value = UiState.Success(null)
+            _uiState.value = UiState.Success(null, showToast = true, message = "Merhaba Dünya")
+            delay(10000)
+            _uiState.value = UiState.Error(error = "Yanlışlık oldu", showToast = true)
         }
 
     }

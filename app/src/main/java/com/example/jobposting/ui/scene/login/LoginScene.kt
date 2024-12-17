@@ -50,7 +50,7 @@ fun LoginScene(
         uiState = uiState.value,
         content = {
             Content(modifier, viewState)
-        }
+        },
     )
 
 }
