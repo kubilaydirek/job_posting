@@ -12,8 +12,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.jobposting.component.JobText
-import com.example.jobposting.scene.login.LoginScene
+import com.example.jobposting.ui.component.text.JobText
+import com.example.jobposting.ui.scene.login.LoginScene
 import com.example.jobposting.ui.theme.JobPostingTheme
 import com.example.jobposting.ui.theme.customTypography
 import dagger.hilt.android.AndroidEntryPoint

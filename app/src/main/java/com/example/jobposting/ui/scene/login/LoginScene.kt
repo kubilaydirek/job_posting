@@ -1,4 +1,4 @@
-package com.example.jobposting.scene.login
+package com.example.jobposting.ui.scene.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
@@ -21,10 +22,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jobposting.R
-import com.example.jobposting.component.Button.JobButton
-import com.example.jobposting.component.Button.SocialButton
-import com.example.jobposting.component.JobText
-import com.example.jobposting.component.JobTextField
+import com.example.jobposting.ui.component.button.JobButton
+import com.example.jobposting.ui.component.button.SocialButton
+import com.example.jobposting.ui.component.text.JobText
+import com.example.jobposting.ui.component.textfield.JobTextField
 import com.example.jobposting.ui.theme.Dark
 import com.example.jobposting.ui.theme.DarkGrey
 import com.example.jobposting.ui.theme.customTypography
@@ -32,7 +33,7 @@ import com.example.jobposting.ui.theme.customTypography
 @Composable
 fun LoginScene(modifier: Modifier = Modifier) {
     val viewState: LoginViewState = rememberLoginViewState()
-    Surface(modifier = modifier.fillMaxSize()) {
+    Surface(modifier = modifier.fillMaxSize().imePadding()) {
         Box(
             modifier = modifier
                 .fillMaxSize()

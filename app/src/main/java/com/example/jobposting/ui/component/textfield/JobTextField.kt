@@ -1,11 +1,10 @@
-package com.example.jobposting.component
+package com.example.jobposting.ui.component.textfield
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -28,8 +27,8 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.jobposting.R
+import com.example.jobposting.ui.component.text.JobText
 import com.example.jobposting.ui.theme.DarkGrey
 import com.example.jobposting.ui.theme.Error
 import com.example.jobposting.ui.theme.customTypography

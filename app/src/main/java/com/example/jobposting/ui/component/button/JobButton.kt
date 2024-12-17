@@ -1,4 +1,4 @@
-package com.example.jobposting.component.Button
+package com.example.jobposting.ui.component.button
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.jobposting.component.JobText
+import com.example.jobposting.ui.component.text.JobText
 import com.example.jobposting.ui.theme.Primary
 import com.example.jobposting.ui.theme.White
 import com.example.jobposting.ui.theme.customTypography

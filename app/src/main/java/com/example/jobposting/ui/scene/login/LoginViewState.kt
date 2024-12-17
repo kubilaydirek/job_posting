@@ -1,4 +1,4 @@
-package com.example.jobposting.scene.login
+package com.example.jobposting.ui.scene.login
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
