@@ -67,7 +67,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     //Lottie
-    implementation("com.airbnb.android:lottie-compose:4.0.0")
+    implementation(libs.lottie.compose)
 
 
 }
