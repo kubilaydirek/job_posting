@@ -3,6 +3,7 @@ package com.example.jobposting.ui.scene.login
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -41,7 +42,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 @Composable
 fun LoginScene(
     modifier: Modifier = Modifier,
-    viewModel: LoginViewModel = hiltViewModel()
+    viewModel: LoginViewModel = hiltViewModel(),
+    navigateToSignUp: () -> Unit
 ) {
 
     val viewState: LoginViewState = rememberLoginViewState()
@@ -50,14 +52,14 @@ fun LoginScene(
     JobScaffold(
         uiState = uiState.value,
         content = {
-            Content(modifier, viewState)
+            Content(modifier, viewState, navigateToSignUp)
         },
     )
 
 }
 
 @Composable
-private fun Content(modifier: Modifier, viewState: LoginViewState) {
+private fun Content(modifier: Modifier, viewState: LoginViewState, navigateToSignUp: () -> Unit) {
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -75,11 +77,11 @@ private fun Content(modifier: Modifier, viewState: LoginViewState) {
                 contentDescription = null,
                 contentScale = ContentScale.Fit,
                 modifier = modifier
-                    .height(253.dp)
-                    .width(343.dp)
+                    .height(250.dp)
+                    .width(350.dp)
             )
             TextContent(modifier)
-            Form(modifier, viewState)
+            Form(modifier, viewState, navigateToSignUp)
         }
     }
 }
@@ -126,7 +128,7 @@ private fun SocialButtons(modifier: Modifier) {
 }
 
 @Composable
-private fun Form(modifier: Modifier, viewState: LoginViewState) {
+private fun Form(modifier: Modifier, viewState: LoginViewState, navigateToSignUp: () -> Unit) {
     Box(
         modifier = modifier
             .height(300.dp)
@@ -165,7 +167,10 @@ private fun Form(modifier: Modifier, viewState: LoginViewState) {
                     Log.i("Giriş Başarılı", "Giriş Başarılı")
                 }
             })
-            JobText(text = stringResource(R.string.sign_up), color = DarkGrey)
+            JobText(
+                text = stringResource(R.string.sign_up),
+                color = DarkGrey,
+                modifier = modifier.clickable { navigateToSignUp.invoke() })
         }
 
     }
@@ -174,5 +179,5 @@ private fun Form(modifier: Modifier, viewState: LoginViewState) {
 @Preview
 @Composable
 private fun LoginScenePreview() {
-    LoginScene()
+    LoginScene(navigateToSignUp = {})
 }

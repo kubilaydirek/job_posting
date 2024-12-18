@@ -7,4 +7,6 @@
     <string name="sign_up">Sign up</string>
     <string name="login_with_social_networks">Login with social networks</string>
     <string name="is_not_empty">Is Not Empty</string>
+    <string name="name">Name</string>
+    <string name="create_your_account">Create your account</string>
 </resources>

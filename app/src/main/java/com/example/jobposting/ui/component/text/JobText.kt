@@ -19,7 +19,6 @@ fun JobText(
     color: Color = Dark,
     style : TextStyle = customTypography.bodyLarge
 ) {
-
     Text(
         text = text,
         modifier = modifier,
