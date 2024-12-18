@@ -63,7 +63,7 @@ fun JobToastMessage(
                 .padding(horizontal = 15.dp, vertical = 30.dp)
                 .height(75.dp)
                 .clip(RoundedCornerShape(16.dp))
-                .background(color = toastType.color)
+                .background(color = toastType.color.copy(alpha = 0.8f))
                 .padding(12.dp),
             contentAlignment = Alignment.Center
         ) {

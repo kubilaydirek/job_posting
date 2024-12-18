@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -49,14 +50,14 @@ fun JobTextField(
     readOnly: Boolean = false
 ) {
     var passwordVisible by rememberSaveable { mutableStateOf(isPasswordField) }
-    var error by remember { mutableStateOf(errorMessage) }
+    val errorText by remember { mutableStateOf(errorMessage) }
 
     Column(modifier = modifier.fillMaxWidth(), horizontalAlignment = Alignment.Start) {
         TextField(
             value = value,
             onValueChange = {
                 onChanceValue(it)
-                error = validator(it.text)
+                if (isError) errorText ?: ""
             },
             modifier = modifier
                 .fillMaxWidth()
@@ -75,7 +76,8 @@ fun JobTextField(
                 errorContainerColor = Color.White,
                 disabledContainerColor = Color.White,
                 errorIndicatorColor = Color.Transparent,
-                errorTextColor = Error
+                errorTextColor = DarkGrey
+
             ),
             shape = RoundedCornerShape(12.dp),
             placeholder = { JobText(text = label, color = DarkGrey, style = customTypography.headlineSmall) },
@@ -100,8 +102,10 @@ fun JobTextField(
             keyboardOptions = keyboardOptions,
             readOnly = readOnly
         )
-        error?.let {
-            JobText(text = "Error Message", color = Error)
+        if (isError) {
+            errorText?.let {
+                JobText(text = errorMessage!!, color = Error,modifier = modifier.padding(start = 10.dp))
+            }
         }
     }
 
@@ -110,5 +114,5 @@ fun JobTextField(
 @Preview
 @Composable
 private fun JobTextFieldPreview() {
-    JobTextField(label = "Label", isPasswordField = true)
+    JobTextField(label = "Label", isPasswordField = true, isError = true, errorMessage = "Boş bırakılamaz")
 }

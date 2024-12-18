@@ -1,6 +1,7 @@
 package com.example.jobposting.ui.scene.login
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -142,7 +143,9 @@ private fun Form(modifier: Modifier, viewState: LoginViewState) {
                 onChanceValue = {
                     viewState.username.value = it
                 },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                isError = viewState.usernameIsError.value,
+                errorMessage = stringResource(R.string.is_not_empty)
             )
             JobTextField(
                 label = stringResource(R.string.password),
@@ -151,10 +154,17 @@ private fun Form(modifier: Modifier, viewState: LoginViewState) {
                     viewState.password.value = it
                 },
                 isPasswordField = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                isError = viewState.passwordIsError.value,
+                errorMessage = stringResource(R.string.is_not_empty)
             )
             JobText(text = stringResource(R.string.forgot_password), color = DarkGrey)
-            JobButton(buttonText = stringResource(R.string.log_in), onclick = {})
+            JobButton(buttonText = stringResource(R.string.log_in), onclick = {
+                viewState.validator()
+                if (!viewState.usernameIsError.value && !viewState.passwordIsError.value) {
+                    Log.i("Giriş Başarılı", "Giriş Başarılı")
+                }
+            })
             JobText(text = stringResource(R.string.sign_up), color = DarkGrey)
         }
 
