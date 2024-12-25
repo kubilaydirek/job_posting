@@ -7,6 +7,7 @@ sealed class ErrorType {
         data object NotFount : Api()
         data object Server : Api()
         data object Unauthorized : Api()
+        data object BadRequest : Api()
     }
 
     data object Unknown : ErrorType()

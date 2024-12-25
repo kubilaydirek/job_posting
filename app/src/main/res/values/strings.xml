@@ -14,5 +14,6 @@
     <string name="error_server">There is some unknown error happened, if it happens again then please report, Please try again.</string>
     <string name="error_network_unavailable">You are not connected to internet, Please try again.</string>
     <string name="error_general">There was some issue loading information, Please try again.</string>
-    <string name="unauthorized">Yetkisiz kullanıcı.</string>
+    <string name="unauthorized">Unauthorized user.</string>
+    <string name="bad_request">username or password is incorrect!</string>
 </resources>

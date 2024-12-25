@@ -6,5 +6,6 @@ object ErrorCodes{
         const val ServiceUnavaible = 503
         const val ResourceNotFound = 404
         const val Unauthorized = 401
+        const val BadRequest = 400
     }
 }

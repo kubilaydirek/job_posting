@@ -12,6 +12,7 @@ fun Throwable.toErrorType() = when (this) {
         ErrorCodes.Http.Unauthorized -> ErrorType.Api.Unauthorized
         ErrorCodes.Http.ServiceUnavaible -> ErrorType.Api.ServiceUnavailable
         ErrorCodes.Http.InternalServer -> ErrorType.Api.Server
+        ErrorCodes.Http.BadRequest -> ErrorType.Api.BadRequest
         else -> ErrorType.Unknown
     }
 
