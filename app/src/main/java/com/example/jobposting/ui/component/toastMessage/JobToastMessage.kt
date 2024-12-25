@@ -24,10 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
-import com.example.jobposting.data.enums.ToastMessageType
-import com.example.jobposting.data.enums.UiState
+import com.example.jobposting.data.helpers.ToastMessageType
 import com.example.jobposting.ui.component.text.JobText
-import com.example.jobposting.ui.theme.Success
 import kotlinx.coroutines.delay
 
 @Composable

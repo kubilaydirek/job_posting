@@ -27,6 +27,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jobposting.R
 import com.example.jobposting.ui.component.scaffold.JobScaffold
 import com.example.jobposting.ui.component.button.JobButton
@@ -52,14 +53,14 @@ fun LoginScene(
     JobScaffold(
         uiState = uiState.value,
         content = {
-            Content(modifier, viewState, navigateToSignUp)
+            Content(modifier, viewState, navigateToSignUp, viewModel)
         },
     )
 
 }
 
 @Composable
-private fun Content(modifier: Modifier, viewState: LoginViewState, navigateToSignUp: () -> Unit) {
+private fun Content(modifier: Modifier, viewState: LoginViewState, navigateToSignUp: () -> Unit, viewModel: LoginViewModel) {
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -81,7 +82,7 @@ private fun Content(modifier: Modifier, viewState: LoginViewState, navigateToSig
                     .width(350.dp)
             )
             TextContent(modifier)
-            Form(modifier, viewState, navigateToSignUp)
+            Form(modifier, viewState, navigateToSignUp, viewModel)
         }
     }
 }
@@ -128,7 +129,7 @@ private fun SocialButtons(modifier: Modifier) {
 }
 
 @Composable
-private fun Form(modifier: Modifier, viewState: LoginViewState, navigateToSignUp: () -> Unit) {
+private fun Form(modifier: Modifier, viewState: LoginViewState, navigateToSignUp: () -> Unit, viewModel: LoginViewModel) {
     Box(
         modifier = modifier
             .height(300.dp)
@@ -162,9 +163,9 @@ private fun Form(modifier: Modifier, viewState: LoginViewState, navigateToSignUp
             )
             JobText(text = stringResource(R.string.forgot_password), color = DarkGrey)
             JobButton(buttonText = stringResource(R.string.log_in), onclick = {
-                viewState.validator()
+            //    viewState.validator()
                 if (!viewState.usernameIsError.value && !viewState.passwordIsError.value) {
-                    Log.i("Giriş Başarılı", "Giriş Başarılı")
+                    viewModel.login(viewState.username.value.text, viewState.password.value.text)
                 }
             })
             JobText(

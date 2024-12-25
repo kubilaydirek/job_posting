@@ -5,8 +5,8 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.example.jobposting.data.enums.ToastMessageType
-import com.example.jobposting.data.enums.UiState
+import com.example.jobposting.data.helpers.ToastMessageType
+import com.example.jobposting.data.helpers.UiState
 import com.example.jobposting.ui.component.progressIndicator.JobProgressIndicator
 import com.example.jobposting.ui.component.toastMessage.JobToastMessage
 
@@ -48,7 +48,7 @@ fun JobScaffold(
                         JobToastMessage(
                             modifier,
                             isVisible = uiState.showToast,
-                            message = uiState.error,
+                            message = uiState.error.asString(),
                             toastType = ToastMessageType.ERROR
                         )
                     }

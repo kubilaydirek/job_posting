@@ -2,30 +2,41 @@ package com.example.jobposting.ui.scene.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.jobposting.data.enums.UiState
+import com.example.jobposting.data.helpers.ErrorTypeToErrorTextConverter
+import com.example.jobposting.data.helpers.ErrorTypeToErrorTextConverterImp
+import com.example.jobposting.data.helpers.Resource
+import com.example.jobposting.data.helpers.UiState
+import com.example.jobposting.data.helpers.extension.toErrorType
+import com.example.jobposting.data.models.Login.LoginRequestModel
+import com.example.jobposting.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor() : ViewModel() {
+class LoginViewModel @Inject constructor(
+    private val authRepository: AuthRepository,
+    private val errorTypeToErrorTextConverter: ErrorTypeToErrorTextConverter = ErrorTypeToErrorTextConverterImp()
+) : ViewModel() {
     private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
     val uiState = _uiState.asStateFlow()
 
-    init {
-        login()
-    }
-
-    private fun login() {
+    fun login(username: String, password: String) {
         viewModelScope.launch {
             _uiState.value = UiState.Loading
-            delay(10000)
-            _uiState.value = UiState.Success(null, showToast = true, message = "Merhaba Dünya")
-            delay(10000)
-            _uiState.value = UiState.Error(error = "Yanlışlık oldu", showToast = true)
+            authRepository.login(LoginRequestModel(username = username, password = password))
+                .catch {
+                    _uiState.value = UiState.Error(errorTypeToErrorTextConverter.convert(it.toErrorType()), showToast = true)
+                }
+                .collect { result ->
+                    when (result) {
+                        is Resource.Success -> _uiState.value = UiState.Success(result.data)
+                        is Resource.Error -> _uiState.value = UiState.Error(errorTypeToErrorTextConverter.convert(result.error))
+                    }
+                }
         }
 
     }

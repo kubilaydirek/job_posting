@@ -1,4 +1,4 @@
-package com.example.jobposting.data.enums
+package com.example.jobposting.data.helpers
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
