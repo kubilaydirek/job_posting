@@ -163,8 +163,7 @@ private fun Form(modifier: Modifier, viewState: LoginViewState, navigateToSignUp
             )
             JobText(text = stringResource(R.string.forgot_password), color = DarkGrey)
             JobButton(buttonText = stringResource(R.string.log_in), onclick = {
-            //    viewState.validator()
-                if (!viewState.usernameIsError.value && !viewState.passwordIsError.value) {
+                if (viewState.inputsValidator()) {
                     viewModel.login(viewState.username.value.text, viewState.password.value.text)
                 }
             })

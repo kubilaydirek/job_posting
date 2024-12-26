@@ -7,8 +7,7 @@ sealed class ErrorType {
         data object NotFount : Api()
         data object Server : Api()
         data object Unauthorized : Api()
-        data object BadRequest : Api()
+        data class UnknownBackend (val errorText : String) : Api()
     }
-
     data object Unknown : ErrorType()
 }

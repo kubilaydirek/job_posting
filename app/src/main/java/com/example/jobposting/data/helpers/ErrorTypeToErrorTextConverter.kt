@@ -13,8 +13,8 @@ class ErrorTypeToErrorTextConverterImp : ErrorTypeToErrorTextConverter {
         ErrorType.Api.Server -> ErrorText.StringResource(R.string.error_server)
         ErrorType.Api.Network -> ErrorText.StringResource(R.string.error_network_unavailable)
         ErrorType.Api.Unauthorized -> ErrorText.StringResource(R.string.unauthorized)
-        ErrorType.Api.BadRequest -> ErrorText.StringResource(R.string.bad_request)
         ErrorType.Unknown -> ErrorText.StringResource(R.string.error_general)
+        is ErrorType.Api.UnknownBackend -> ErrorText.ApiErrorText(errorType.errorText)
     }
 
 }

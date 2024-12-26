@@ -19,12 +19,13 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val authRepository: AuthRepository,
-    private val errorTypeToErrorTextConverter: ErrorTypeToErrorTextConverter = ErrorTypeToErrorTextConverterImp()
+    private val errorTypeToErrorTextConverter: ErrorTypeToErrorTextConverter = ErrorTypeToErrorTextConverterImp(),
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
     val uiState = _uiState.asStateFlow()
 
     fun login(username: String, password: String) {
+
         viewModelScope.launch {
             _uiState.value = UiState.Loading
             authRepository.login(LoginRequestModel(username = username, password = password))

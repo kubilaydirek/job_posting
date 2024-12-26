@@ -14,9 +14,10 @@ class LoginViewState {
     var passwordIsError: MutableState<Boolean> = mutableStateOf(false)
     var usernameIsError: MutableState<Boolean> = mutableStateOf(false)
 
-    fun validator() {
+    fun inputsValidator(): Boolean {
         usernameIsError.value = username.value.text.let { EmailValidator().validate(it) }
         passwordIsError.value = password.value.text.let { PasswordValidator().validate(it) }
+        return usernameIsError.value && passwordIsError.value
     }
 }
 
