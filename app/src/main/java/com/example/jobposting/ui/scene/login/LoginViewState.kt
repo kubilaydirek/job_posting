@@ -17,7 +17,7 @@ class LoginViewState {
     fun inputsValidator(): Boolean {
         usernameIsError.value = username.value.text.let { EmailValidator().validate(it) }
         passwordIsError.value = password.value.text.let { PasswordValidator().validate(it) }
-        return usernameIsError.value && passwordIsError.value
+        return (usernameIsError.value && passwordIsError.value)
     }
 }
 
