@@ -76,6 +76,5 @@ dependencies {
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
 
-    implementation(project(":app:local-preference"))
-
+    implementation(project(":app:local_preference"))
 }

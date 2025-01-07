@@ -1,7 +1,7 @@
 package com.example.jobposting.data.validator
 
-class PasswordValidator : FieldValidator<String> {
+class TextFieldValidator : FieldValidator<String> {
     override fun validate(value: String): Boolean {
-        return value.length <= 6
+        return value.isEmpty()
     }
 }

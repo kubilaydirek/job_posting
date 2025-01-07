@@ -40,17 +40,23 @@ fun RegisterScene(
     navigationToBack: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val viewState: RegisterViewState = RegisterViewState()
 
     JobScaffold(
         content = {
-            Content(modifier, navigationToBack)
+            Content(modifier, navigationToBack, viewModel, viewState)
         },
         uiState = uiState
     )
 }
 
 @Composable
-private fun Content(modifier: Modifier, navigationToBack: () -> Unit) {
+private fun Content(
+    modifier: Modifier,
+    navigationToBack: () -> Unit,
+    viewModel: RegisterViewModel,
+    viewState: RegisterViewState
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -71,7 +77,7 @@ private fun Content(modifier: Modifier, navigationToBack: () -> Unit) {
                     .width(350.dp)
             )
             TextContent(modifier)
-            Form(modifier, navigationToBack)
+            Form(modifier, navigationToBack, viewModel, viewState)
         }
     }
 }
@@ -97,7 +103,7 @@ private fun TextContent(modifier: Modifier) {
 }
 
 @Composable
-private fun Form(modifier: Modifier, navigationToBack: () -> Unit) {
+private fun Form(modifier: Modifier, navigationToBack: () -> Unit, viewModel: RegisterViewModel, viewState: RegisterViewState) {
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -109,10 +115,39 @@ private fun Form(modifier: Modifier, navigationToBack: () -> Unit) {
             verticalArrangement = Arrangement.spacedBy(15.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            JobTextField(label = stringResource(R.string.name))
-            JobTextField(label = stringResource(R.string.email))
-            JobTextField(label = stringResource(R.string.password))
-            JobButton(onclick = {}, buttonText = stringResource(R.string.sign_up))
+            JobTextField(
+                value = viewState.firstName.value,
+                label = stringResource(R.string.name),
+                onChanceValue = { viewState.firstName.value = it },
+                isError = viewState.firstNameIsValid.value,
+                errorMessage = stringResource(R.string.is_not_empty)
+            )
+            JobTextField(
+                value = viewState.email.value,
+                label = stringResource(R.string.email),
+                onChanceValue = { viewState.email.value = it },
+                isError = viewState.emailIsValid.value,
+                errorMessage = stringResource(R.string.is_not_empty)
+            )
+            JobTextField(
+                value = viewState.password.value,
+                label = stringResource(R.string.password),
+                onChanceValue = { viewState.password.value = it },
+                isError = viewState.passwordIsValid.value,
+                errorMessage = stringResource(R.string.is_not_empty)
+            )
+            JobButton(onclick = {
+                if (viewState.isValid()) {
+                    viewModel.register(
+                        username = viewState.username.value.text,
+                        firstName = viewState.firstName.value.text,
+                        lastName = viewState.lastName.value.text,
+                        email = viewState.email.value.text,
+                        password = viewState.password.value.text,
+                    )
+                }
+
+            }, buttonText = stringResource(R.string.sign_up))
             JobText(
                 text = stringResource(R.string.log_in),
                 color = DarkGrey,

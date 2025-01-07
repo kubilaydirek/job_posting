@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "JobPosting"
 include(":app")
-include(":app:local-preference")
+include(":app:local_preference")

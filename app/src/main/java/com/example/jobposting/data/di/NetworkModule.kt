@@ -1,6 +1,8 @@
 package com.example.jobposting.data.di
 
+import com.example.jobposting.data.interceptor.AuthInterceptor
 import com.example.jobposting.data.service.AuthApiService
+import com.example.local_preference.UserPreference
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,14 +17,15 @@ import javax.inject.Singleton
 object NetworkModule {
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder().build()
+    fun provideOkHttpClient(authInterceptor: AuthInterceptor): OkHttpClient {
+        return OkHttpClient.Builder().addInterceptor(authInterceptor).build()
     }
 
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder().baseUrl("http://192.168.60.85:8080/api/").client(okHttpClient).addConverterFactory(GsonConverterFactory.create())
+        return Retrofit.Builder().baseUrl("http://192.168.60.85:8080/api/").client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
@@ -31,4 +34,8 @@ object NetworkModule {
     fun provideAuthApiService(retrofit: Retrofit): AuthApiService {
         return retrofit.create(AuthApiService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideAuthAuthenticator(userPreference: UserPreference): AuthInterceptor = AuthInterceptor(userPreference)
 }
