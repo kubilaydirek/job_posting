@@ -104,56 +104,58 @@ private fun TextContent(modifier: Modifier) {
 
 @Composable
 private fun Form(modifier: Modifier, navigationToBack: () -> Unit, viewModel: RegisterViewModel, viewState: RegisterViewState) {
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(330.dp)
-            .padding(top = 15.dp)
-    ) {
-        Column(
-            modifier = modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(15.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            JobTextField(
-                value = viewState.firstName.value,
-                label = stringResource(R.string.name),
-                onChanceValue = { viewState.firstName.value = it },
-                isError = viewState.firstNameIsValid.value,
-                errorMessage = stringResource(R.string.is_not_empty)
-            )
-            JobTextField(
-                value = viewState.email.value,
-                label = stringResource(R.string.email),
-                onChanceValue = { viewState.email.value = it },
-                isError = viewState.emailIsValid.value,
-                errorMessage = stringResource(R.string.is_not_empty)
-            )
-            JobTextField(
-                value = viewState.password.value,
-                label = stringResource(R.string.password),
-                onChanceValue = { viewState.password.value = it },
-                isError = viewState.passwordIsValid.value,
-                errorMessage = stringResource(R.string.is_not_empty)
-            )
-            JobButton(onclick = {
-                if (viewState.isValid()) {
-                    viewModel.register(
-                        username = viewState.username.value.text,
-                        firstName = viewState.firstName.value.text,
-                        lastName = viewState.lastName.value.text,
-                        email = viewState.email.value.text,
-                        password = viewState.password.value.text,
-                    )
-                }
 
-            }, buttonText = stringResource(R.string.sign_up))
-            JobText(
-                text = stringResource(R.string.log_in),
-                color = DarkGrey,
-                modifier = modifier.clickable { navigationToBack.invoke() })
-        }
+    Column(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(15.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        JobTextField(
+            value = viewState.firstName.value,
+            label = stringResource(R.string.name),
+            onChanceValue = { viewState.firstName.value = it },
+            isError = viewState.firstNameIsValid.value,
+            errorMessage = stringResource(R.string.is_not_empty)
+        )
+        JobTextField(
+            value = viewState.lastName.value,
+            label = stringResource(R.string.surname),
+            onChanceValue = { viewState.lastName.value = it },
+            isError = viewState.lastNameIsValid.value,
+            errorMessage = stringResource(R.string.is_not_empty)
+        )
+        JobTextField(
+            value = viewState.email.value,
+            label = stringResource(R.string.email),
+            onChanceValue = { viewState.email.value = it },
+            isError = viewState.emailIsValid.value,
+            errorMessage = stringResource(R.string.is_not_empty)
+        )
+        JobTextField(
+            value = viewState.password.value,
+            label = stringResource(R.string.password),
+            onChanceValue = { viewState.password.value = it },
+            isError = viewState.passwordIsValid.value,
+            errorMessage = stringResource(R.string.is_not_empty)
+        )
+        JobButton(onclick = {
+            if (viewState.isValid()) {
+                viewModel.register(
+                    username = "${viewState.firstName.value.text}${viewState.lastName.value.text}",
+                    firstName = viewState.firstName.value.text,
+                    lastName = viewState.lastName.value.text,
+                    email = viewState.email.value.text,
+                    password = viewState.password.value.text,
+                )
+            }
+
+        }, buttonText = stringResource(R.string.sign_up))
+        JobText(
+            text = stringResource(R.string.log_in),
+            color = DarkGrey,
+            modifier = modifier.clickable { navigationToBack.invoke() })
     }
+
 }
 
 @Preview

@@ -8,6 +8,7 @@
     <string name="login_with_social_networks">Login with social networks</string>
     <string name="is_not_empty">Is Not Empty</string>
     <string name="name">Name</string>
+    <string name="surname">Surname</string>
     <string name="create_your_account">Create your account</string>
     <string name="error_resource_not_found">Required information is not available at the moment, Please try again later.</string>
     <string name="error_service_unavailable">Currently Service is not available, Please try again later.</string>
