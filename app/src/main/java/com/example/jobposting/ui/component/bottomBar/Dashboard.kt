@@ -1,4 +1,4 @@
-package com.example.jobposting.ui.scene.home
+package com.example.jobposting.ui.component.bottomBar
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -24,8 +24,8 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.jobposting.ui.component.bottomBar.BottomNavigationBarItems
 import com.example.jobposting.ui.component.text.JobText
+import com.example.jobposting.ui.scene.home.HomeScene
 import com.example.jobposting.ui.scene.profile.ProfileScene
 import com.example.jobposting.ui.scene.settings.SettingsScene
 import com.example.jobposting.ui.theme.Gray

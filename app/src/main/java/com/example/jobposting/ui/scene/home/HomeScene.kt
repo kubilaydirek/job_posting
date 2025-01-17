@@ -16,6 +16,5 @@ fun HomeScene(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center
     ) {
         Text("Home Scene")
-
     }
 }
