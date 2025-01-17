@@ -17,6 +17,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jobposting.R
+import com.example.jobposting.data.helpers.UiState
 import com.example.jobposting.ui.component.scaffold.JobScaffold
 import com.example.jobposting.ui.component.button.JobButton
 import com.example.jobposting.ui.component.button.SocialButton
@@ -44,11 +46,17 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 fun LoginScene(
     modifier: Modifier = Modifier,
     viewModel: LoginViewModel = hiltViewModel(),
-    navigateToSignUp: () -> Unit
+    navigateToSignUp: () -> Unit = {},
+    navigateToHome: () -> Unit = {},
 ) {
-
     val viewState: LoginViewState = rememberLoginViewState()
     val uiState = viewModel.uiState.collectAsState()
+
+    LaunchedEffect(uiState.value) {
+        if (uiState.value is UiState.Success<*>) {
+            navigateToHome.invoke()
+        }
+    }
 
     JobScaffold(
         uiState = uiState.value,
@@ -74,7 +82,7 @@ private fun Content(modifier: Modifier, viewState: LoginViewState, navigateToSig
             verticalArrangement = Arrangement.spacedBy(5.dp)
         ) {
             Image(
-                painter = painterResource(R.drawable.cool_kids_sitting),
+                painter = painterResource(R.drawable.cool_kids_standing),
                 contentDescription = null,
                 contentScale = ContentScale.Fit,
                 modifier = modifier

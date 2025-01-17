@@ -12,27 +12,17 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class UserDataStore @Inject constructor(private val dataStore: DataStore<Preferences>) : UserPreference {
-    override fun getUserName(): Flow<String> {
-        return dataStore.data.catch { emit(emptyPreferences()) }.map { preference ->
-            preference[KEYS.KEY_USER_NAME] ?: ""
-        }
+    override fun <T : Any> getData(data: Preferences.Key<T>): Flow<T?> {
+        return dataStore.data
+            .catch { emit(emptyPreferences()) }
+            .map { preferences ->
+                preferences[data]
+            }
     }
 
-    override suspend fun saveUserName(name: String) {
+    override suspend fun <T : Any> saveData(data: Preferences.Key<T>, savedData: T) {
         dataStore.edit { preference ->
-            preference[KEYS.KEY_USER_NAME] = name
-        }
-    }
-
-    override fun getToken(): Flow<String> {
-        return dataStore.data.catch { emit(emptyPreferences()) }.map { preference ->
-            preference[KEYS.TOKEN] ?: ""
-        }
-    }
-
-    override suspend fun saveToken(token: String) {
-        dataStore.edit { preference ->
-            preference[KEYS.TOKEN] = token
+            preference[data] = savedData
         }
     }
 }
@@ -40,4 +30,6 @@ class UserDataStore @Inject constructor(private val dataStore: DataStore<Prefere
 object KEYS {
     val KEY_USER_NAME = stringPreferencesKey("user_name")
     val TOKEN = stringPreferencesKey("token")
+    val NAME = stringPreferencesKey("name")
+    val SURNAME = stringPreferencesKey("surname")
 }

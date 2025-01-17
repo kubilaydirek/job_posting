@@ -10,6 +10,7 @@ import com.example.jobposting.data.helpers.extension.toErrorType
 import com.example.jobposting.data.models.Login.LoginRequestModel
 import com.example.jobposting.data.repository.AuthRepository
 import com.example.local_preference.UserPreference
+import com.example.local_preference.data.KEYS
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -36,14 +37,12 @@ class LoginViewModel @Inject constructor(
                 .collect { result ->
                     when (result) {
                         is Resource.Success -> {
-                            userPreference.saveToken(result.data.idToken)
+                            userPreference.saveData(KEYS.TOKEN, result.data.idToken)
                             _uiState.value = UiState.Success(result.data)
                         }
-
                         is Resource.Error -> _uiState.value = UiState.Error(errorTypeToErrorTextConverter.convert(result.error))
                     }
                 }
         }
-
     }
 }

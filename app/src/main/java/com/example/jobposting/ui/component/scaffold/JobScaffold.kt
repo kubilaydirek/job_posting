@@ -15,6 +15,7 @@ fun JobScaffold(
     modifier: Modifier = Modifier,
     content: @Composable (PaddingValues) -> Unit,
     uiState: UiState = UiState.Empty,
+    bottomBar: @Composable () -> Unit = {}
 ) {
     Scaffold(
         modifier = modifier.imePadding(),
@@ -55,5 +56,6 @@ fun JobScaffold(
                 }
             }
         },
+        bottomBar = bottomBar
     )
 }

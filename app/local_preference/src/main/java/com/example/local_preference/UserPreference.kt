@@ -1,13 +1,10 @@
 package com.example.local_preference
 
+import androidx.datastore.preferences.core.Preferences
 import kotlinx.coroutines.flow.Flow
 
 interface UserPreference {
-    fun getUserName(): Flow<String>
+    fun <T : Any> getData(data: Preferences.Key<T>): Flow<T?>
 
-    suspend fun saveUserName(name: String)
-
-    fun getToken(): Flow<String>
-
-    suspend fun saveToken(token: String)
+    suspend fun <T: Any> saveData(data: Preferences.Key<T>, savedData: T)
 }

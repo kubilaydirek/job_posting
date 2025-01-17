@@ -26,7 +26,6 @@ class RegisterViewState {
         lastNameIsValid.value = lastName.value.let { TextFieldValidator().validate(lastName.value.text) }
         emailIsValid.value = email.value.let { EmailValidator().validate(email.value.text) }
         passwordIsValid.value = password.value.let { PasswordValidator().validate(password.value.text) }
-
         return (!firstNameIsValid.value && !lastNameIsValid.value && !emailIsValid.value && !passwordIsValid.value)
     }
 

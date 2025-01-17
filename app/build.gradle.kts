@@ -76,5 +76,8 @@ dependencies {
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
 
+    //Datastore
     implementation(project(":app:local_preference"))
+    implementation(libs.androidx.datastore.preferences)
+
 }

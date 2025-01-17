@@ -21,7 +21,6 @@ import javax.inject.Inject
 class RegisterViewModel @Inject constructor(
     private val authRepository: AuthRepository,
     private val errorTypeToErrorTextConverter: ErrorTypeToErrorTextConverter = ErrorTypeToErrorTextConverterImp(),
-    private val userPreference: UserPreference
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
     val uiState = _uiState.asStateFlow()
@@ -49,7 +48,9 @@ class RegisterViewModel @Inject constructor(
                 }
                 .collect { result ->
                     when (result) {
-                        is Resource.Success -> _uiState.value = UiState.Success(result.data)
+                        is Resource.Success -> _uiState.value =
+                            UiState.Success(result.data, showToast = true, message = "Registration successful")
+
                         is Resource.Error -> _uiState.value =
                             UiState.Error(errorTypeToErrorTextConverter.convert(result.error), showToast = true)
                     }

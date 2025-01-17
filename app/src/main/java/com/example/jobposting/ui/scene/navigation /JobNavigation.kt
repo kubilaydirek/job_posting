@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.example.jobposting.ui.scene.home.homeGraph
 import com.example.jobposting.ui.scene.login.loginGraph
 import com.example.jobposting.ui.scene.register.registerGraph
 
@@ -16,5 +17,6 @@ fun JobNavigation(modifier: Modifier = Modifier) {
     NavHost(navController = navController, startDestination = login) {
         loginGraph(navController = navController)
         registerGraph(navController = navController)
+        homeGraph(navController = navController)
     }
 }
