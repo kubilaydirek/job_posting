@@ -17,15 +17,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.jobposting.ui.theme.Dark
 import com.example.jobposting.ui.theme.DarkGrey
 
 @Composable
-fun JobCircleBackButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
+fun JobCircleBackButton(modifier: Modifier = Modifier, onClick: () -> Unit, size: Dp = 50.dp) {
     Box(
         modifier = modifier
-            .size(50.dp)
+            .size(size)
             .border(1.dp, DarkGrey, CircleShape)
             .padding(1.dp)
             .clip(CircleShape)
@@ -33,7 +34,11 @@ fun JobCircleBackButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
             .clickable { onClick.invoke() },
         contentAlignment = Alignment.Center
     ) {
-        Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft, contentDescription = null, modifier = modifier.size(30.dp))
+        Icon(
+            imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+            contentDescription = null,
+            modifier = modifier.size(30.dp)
+        )
     }
 }
 
