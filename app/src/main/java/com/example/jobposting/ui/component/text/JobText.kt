@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jobposting.ui.theme.Dark
 import com.example.jobposting.ui.theme.White
@@ -17,15 +18,17 @@ fun JobText(
     text: String,
     bold: Boolean = false,
     color: Color = Dark,
-    style : TextStyle = customTypography.bodyLarge
+    style: TextStyle = customTypography.bodyLarge,
+    overflow: TextOverflow = TextOverflow.Clip
 ) {
     Text(
         text = text,
         modifier = modifier,
         style = style.copy(
-            fontWeight = if(bold) FontWeight.Bold else FontWeight.Normal,
+            fontWeight = if (bold) FontWeight.Bold else FontWeight.Normal,
             color = color
-        )
+        ),
+        overflow = overflow
     )
 }
 

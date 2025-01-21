@@ -2,7 +2,7 @@ package com.example.jobposting.ui.component.topbar
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,7 +12,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,34 +32,24 @@ import com.example.jobposting.ui.theme.Gray
 import com.example.jobposting.ui.theme.customTypography
 
 object JobTopBar {
-
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun JobHomePageTopBar(modifier: Modifier = Modifier) {
-        Surface(
-            modifier = modifier
-                .fillMaxWidth()
-                .height(75.dp)
-                .padding(8.dp)
-        ) {
-            Row(
-                modifier = modifier.fillMaxSize(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column(
-                    modifier = modifier.weight(3f),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.Start
-                ) {
-                    JobText(text = "Hello,", style = customTypography.titleSmall)
-                    JobText(text = "John Smith", style = customTypography.displayLarge)
+        TopAppBar(
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White),
+            title = {
+                Column {
+                    JobText(text = "Hello,", style = customTypography.bodyMedium)
+                    JobText(text = "John Smith Smith Smith", style = customTypography.titleMedium)
                 }
-
+            },
+            actions = {
                 Box(
                     modifier = modifier
                         .height(48.dp)
                         .width(48.dp)
                         .clip(CircleShape)
-                        .border(1.dp, Gray, CircleShape), contentAlignment = Alignment.Center
+                        .border(1.dp, Gray, CircleShape).clickable {  }, contentAlignment = Alignment.Center
                 ) {
                     Image(
                         painterResource(R.drawable.notification_icon),
@@ -67,8 +60,7 @@ object JobTopBar {
                     )
                 }
             }
-
-        }
+        )
     }
 
 

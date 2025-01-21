@@ -2,6 +2,7 @@ package com.example.jobposting.data.di
 
 import com.example.jobposting.data.interceptor.AuthInterceptor
 import com.example.jobposting.data.service.AuthApiService
+import com.example.jobposting.data.service.HomeApiService
 import com.example.local_preference.UserPreference
 import dagger.Module
 import dagger.Provides
@@ -33,6 +34,12 @@ object NetworkModule {
     @Singleton
     fun provideAuthApiService(retrofit: Retrofit): AuthApiService {
         return retrofit.create(AuthApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideHomeApiService(retrofit: Retrofit): HomeApiService {
+        return retrofit.create(HomeApiService::class.java)
     }
 
     @Provides

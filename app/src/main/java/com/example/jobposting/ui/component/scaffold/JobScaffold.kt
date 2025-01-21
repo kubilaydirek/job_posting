@@ -1,10 +1,12 @@
 package com.example.jobposting.ui.component.scaffold
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import com.example.jobposting.data.helpers.ToastMessageType
 import com.example.jobposting.data.helpers.UiState
 import com.example.jobposting.ui.component.progressIndicator.JobProgressIndicator
@@ -15,11 +17,13 @@ fun JobScaffold(
     modifier: Modifier = Modifier,
     content: @Composable (PaddingValues) -> Unit,
     uiState: UiState = UiState.Empty,
-    bottomBar: @Composable () -> Unit = {}
+    bottomBar: @Composable () -> Unit = {},
+    topBar: @Composable () -> Unit = {}
 ) {
     Scaffold(
+        containerColor = Color.White,
         modifier = modifier.imePadding(),
-        topBar = {},
+        topBar = { topBar.invoke() },
         content = {
             when (uiState) {
                 is UiState.Empty -> {
@@ -56,6 +60,8 @@ fun JobScaffold(
                 }
             }
         },
-        bottomBar = bottomBar
+        bottomBar = {
+            bottomBar.invoke()
+        }
     )
 }
