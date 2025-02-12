@@ -32,7 +32,6 @@ class HomeViewModel @Inject constructor(
     val name = _name.asStateFlow()
 
     init {
-        getNameSurname()
         getAllJobs()
     }
 
@@ -52,15 +51,6 @@ class HomeViewModel @Inject constructor(
                         is Resource.Error -> _uiState.value = UiState.Error(errorTypeToErrorTextConverter.convert(result.error))
                     }
                 }
-        }
-    }
-
-
-    private fun getNameSurname() {
-        viewModelScope.launch {
-            val name = userPreference.getData<String>(KEYS.NAME).firstOrNull()
-            val surname = userPreference.getData<String>(KEYS.SURNAME).firstOrNull()
-            _name.value = "$name $surname"
         }
     }
 
