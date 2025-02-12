@@ -42,7 +42,6 @@ fun JobTextField(
     label: String,
     isPasswordField: Boolean = false,
     trailingIcon: @Composable (() -> Unit)? = null,
-    validator: (String) -> String? = { _ -> null },
     isError: Boolean = false,
     errorMessage: String? = null,
     maxLine: Int = 1,

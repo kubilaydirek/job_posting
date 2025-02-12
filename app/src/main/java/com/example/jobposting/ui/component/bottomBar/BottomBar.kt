@@ -5,8 +5,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,6 +40,7 @@ import com.example.jobposting.ui.theme.Primary
 @Composable
 fun JobBottomBar(modifier: Modifier = Modifier) {
     var selectedIndex by remember { mutableIntStateOf(0) }
+    val imaVisible = WindowInsets.ime.getBottom(LocalDensity.current) > 0
 
     val screens = listOf(
         BottomNavigationBarItems.HomeScene,
@@ -45,11 +49,11 @@ fun JobBottomBar(modifier: Modifier = Modifier) {
     )
 
     JobScaffold(
-        content = { padding ->
+        content = { paddingValue ->
             Box(
                 modifier = modifier
                     .fillMaxSize()
-                    .padding(padding)
+                    .padding(paddingValue)
             ) {
                 when (selectedIndex) {
                     0 -> HomeScene()
@@ -57,9 +61,10 @@ fun JobBottomBar(modifier: Modifier = Modifier) {
                     2 -> SettingsScene()
                 }
             }
-
         },
         bottomBar = {
+            if (imaVisible) return@JobScaffold
+
             NavigationBar(
                 modifier = Modifier
                     .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))

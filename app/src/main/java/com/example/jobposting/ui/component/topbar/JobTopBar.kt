@@ -34,13 +34,14 @@ import com.example.jobposting.ui.theme.customTypography
 object JobTopBar {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun JobHomePageTopBar(modifier: Modifier = Modifier) {
+    fun JobHomePageTopBar(modifier: Modifier = Modifier, name: String?) {
+
         TopAppBar(
             colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White),
             title = {
                 Column {
                     JobText(text = "Hello,", style = customTypography.bodyMedium)
-                    JobText(text = "John Smith Smith Smith", style = customTypography.titleMedium)
+                    JobText(text = name ?: "", style = customTypography.titleMedium)
                 }
             },
             actions = {
@@ -49,7 +50,8 @@ object JobTopBar {
                         .height(48.dp)
                         .width(48.dp)
                         .clip(CircleShape)
-                        .border(1.dp, Gray, CircleShape).clickable {  }, contentAlignment = Alignment.Center
+                        .border(1.dp, Gray, CircleShape)
+                        .clickable { }, contentAlignment = Alignment.Center
                 ) {
                     Image(
                         painterResource(R.drawable.notification_icon),
@@ -71,9 +73,11 @@ object JobTopBar {
                 .fillMaxWidth()
                 .height(45.dp)
         ) {
-            Row(modifier = modifier
-                .fillMaxSize()
-                .padding(start = 15.dp), verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                modifier = modifier
+                    .fillMaxSize()
+                    .padding(start = 15.dp), verticalAlignment = Alignment.CenterVertically
+            ) {
                 JobCircleBackButton(size = 40.dp, onClick = {})
                 Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     JobText(text = "Header", style = customTypography.headlineLarge)
@@ -88,7 +92,7 @@ object JobTopBar {
 @Preview(showBackground = true)
 @Composable
 private fun JopTopBarHomePagePreview() {
-    JobTopBar.JobHomePageTopBar()
+    JobTopBar.JobHomePageTopBar(name = "Kubilay Direk")
 }
 
 @Preview(showBackground = true)

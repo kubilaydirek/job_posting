@@ -1,7 +1,6 @@
 package com.example.jobposting.ui.scene.login
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -28,7 +27,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jobposting.R
 import com.example.jobposting.data.helpers.UiState
 import com.example.jobposting.ui.component.scaffold.JobScaffold
@@ -39,7 +37,6 @@ import com.example.jobposting.ui.component.textfield.JobTextField
 import com.example.jobposting.ui.theme.Dark
 import com.example.jobposting.ui.theme.DarkGrey
 import com.example.jobposting.ui.theme.customTypography
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable

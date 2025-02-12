@@ -38,8 +38,11 @@ class LoginViewModel @Inject constructor(
                     when (result) {
                         is Resource.Success -> {
                             userPreference.saveData(KEYS.TOKEN, result.data.idToken)
+                            userPreference.saveData(KEYS.NAME, result.data.firstName ?: "")
+                            userPreference.saveData(KEYS.SURNAME, result.data.lastName ?: "")
                             _uiState.value = UiState.Success(result.data)
                         }
+
                         is Resource.Error -> _uiState.value = UiState.Error(errorTypeToErrorTextConverter.convert(result.error))
                     }
                 }

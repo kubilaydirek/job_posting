@@ -19,7 +19,8 @@ fun JobText(
     bold: Boolean = false,
     color: Color = Dark,
     style: TextStyle = customTypography.bodyLarge,
-    overflow: TextOverflow = TextOverflow.Clip
+    overflow: TextOverflow = TextOverflow.Clip,
+    maxLine: Int = 1,
 ) {
     Text(
         text = text,
@@ -28,7 +29,8 @@ fun JobText(
             fontWeight = if (bold) FontWeight.Bold else FontWeight.Normal,
             color = color
         ),
-        overflow = overflow
+        overflow = overflow,
+        maxLines = maxLine
     )
 }
 
